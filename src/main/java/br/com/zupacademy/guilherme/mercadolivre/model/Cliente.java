@@ -33,8 +33,6 @@ public class Cliente {
 	@NotBlank
 	@Length(min = 6)
 	private String senha;
-	
-
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime dataCadastro = LocalDateTime.now();
 
