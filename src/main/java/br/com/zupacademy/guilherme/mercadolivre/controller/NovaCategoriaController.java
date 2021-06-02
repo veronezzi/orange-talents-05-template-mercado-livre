@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zupacademy.guilherme.mercadolivre.form.CategoriaForm;
-import br.com.zupacademy.guilherme.mercadolivre.form.ClienteForm;
+import br.com.zupacademy.guilherme.mercadolivre.form.UsuarioForm;
 import br.com.zupacademy.guilherme.mercadolivre.model.Categoria;
-import br.com.zupacademy.guilherme.mercadolivre.model.Cliente;
+import br.com.zupacademy.guilherme.mercadolivre.model.Usuario;
 
 @RestController
 @RequestMapping("/cadastrarCategoria")

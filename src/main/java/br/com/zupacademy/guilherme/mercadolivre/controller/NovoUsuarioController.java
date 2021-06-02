@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.zupacademy.guilherme.mercadolivre.form.ClienteForm;
-import br.com.zupacademy.guilherme.mercadolivre.model.Cliente;
+import br.com.zupacademy.guilherme.mercadolivre.form.UsuarioForm;
+import br.com.zupacademy.guilherme.mercadolivre.model.Usuario;
 
 @RestController
-@RequestMapping("/cadastrarCliente")
+@RequestMapping("/cadastrarUsuario")
 public class NovoUsuarioController {
 	
 	@PersistenceContext
@@ -22,8 +22,8 @@ public class NovoUsuarioController {
 	
 	@PostMapping
 	@Transactional
-	public String cadastrarCliente(@RequestBody @Valid ClienteForm form) {
-		Cliente cliente = form.toModel();
+	public String cadastrarUsuario(@RequestBody @Valid UsuarioForm form) {
+		Usuario cliente = form.toModel();
 		manager.persist(cliente);
 		return cliente.toString();
 
