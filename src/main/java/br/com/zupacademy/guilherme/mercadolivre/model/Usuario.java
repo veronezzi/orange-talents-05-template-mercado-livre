@@ -138,6 +138,10 @@ public class Usuario implements UserDetails {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getEmail() {
+		return this.email;
+	}
+	
 	
 
 }

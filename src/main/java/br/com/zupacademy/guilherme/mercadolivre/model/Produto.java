@@ -20,6 +20,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 
 import com.sun.istack.NotNull;
@@ -48,34 +50,59 @@ public class Produto {
 	@Valid
 	@ManyToOne
 	private Categoria categoria;
-	
-	@OneToMany(mappedBy = "produto",cascade = CascadeType.PERSIST)
+
+	@NotNull
+	@Valid
+	@ManyToOne
+	private Usuario dono;
+
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
 	private Set<CaracteristicaProduto> caracteristicas = new HashSet<>();
-	
+
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<ImagemProduto> imagens = new HashSet<>();
+
+	@Deprecated
+	public Produto() {
+	}
 
 	public Produto(@NotBlank String nome, @Positive BigDecimal valor, @Positive int quantidade,
-			@NotBlank @Length(max = 1000) String descricao, @Valid Categoria categoria, @Size(min = 3) 
-	@Valid Collection<NovaCaracteristicaForm> caracteristicas) {
+			@NotBlank @Length(max = 1000) String descricao, @Valid Categoria categoria, @NotNull @Valid Usuario dono,
+			@Size(min = 3) @Valid Collection<NovaCaracteristicaForm> caracteristicas) {
 
 		this.nome = nome;
 		this.valor = valor;
 		this.quantidade = quantidade;
 		this.descricao = descricao;
 		this.categoria = categoria;
-		this.caracteristicas.addAll(caracteristicas
-				.stream().map(caracteristica -> caracteristica.toModel(this))
+		this.dono = dono;
+
+		this.caracteristicas.addAll(caracteristicas.stream().map(caracteristica -> caracteristica.toModel(this))
 				.collect(Collectors.toSet()));
 
 	}
 
-
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", valor=" + valor + ", quantidade=" + quantidade
-				+ ", descricao=" + descricao + ", categoria=" + categoria + ", caracteristicas=" + caracteristicas
-				+ "]";
+				+ ", descricao=" + descricao + ", categoria=" + categoria + ", dono=" + dono + ", caracteristicas="
+				+ caracteristicas + ", imagens=" + imagens + "]";
 	}
 
-	
+	public void associaImagens(Set<String> links) {
+		Set<ImagemProduto> imagens = links.stream().map(link -> new ImagemProduto(this, link))
+				.collect(Collectors.toSet());
+
+		this.imagens.addAll(imagens);
+
+	}
+
+	public boolean pertenceAoUsuario(Usuario possivelDono) {
+		return this.dono.equals(possivelDono);
+	}
+
+	public Usuario getDono() {
+		return this.dono;
+	}
 
 }

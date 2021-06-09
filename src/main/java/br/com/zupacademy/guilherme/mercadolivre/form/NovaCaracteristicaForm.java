@@ -27,7 +27,12 @@ public class NovaCaracteristicaForm {
 		return descricao;
 	}
 
+	@Override
+	public String toString() {
+		return "NovaCaracteristicaForm [nome=" + nome + ", descricao=" + descricao + "]";
+	}
+
 	public CaracteristicaProduto toModel(@NotNull @Valid Produto produto) {
-		return new CaracteristicaProduto(nome,descricao,produto);
+		return new CaracteristicaProduto(nome, descricao, produto);
 	}
 }

@@ -20,6 +20,7 @@ import org.hibernate.validator.constraints.Length;
 import com.sun.istack.NotNull;
 
 import br.com.zupacademy.guilherme.mercadolivre.model.Produto;
+import br.com.zupacademy.guilherme.mercadolivre.model.Usuario;
 import br.com.zupacademy.guilherme.mercadolivre.config.validacao.UniqueValue;
 import br.com.zupacademy.guilherme.mercadolivre.model.Categoria;
 
@@ -62,9 +63,9 @@ public class ProdutoForm {
 		return caracteristicas;
 	}
 
-	public Produto toModel(EntityManager manager) {
+	public Produto toModel(EntityManager manager,Usuario dono) {
 		Categoria categoria = manager.find(Categoria.class, idCategoria);
-		return new Produto(nome, valor, quantidade, descricao, categoria,caracteristicas);
+		return new Produto(nome, valor, quantidade, descricao,categoria,dono,caracteristicas);
 	}
 	
 	
