@@ -47,7 +47,7 @@ public class Usuario implements UserDetails {
 	private String senha;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime dataCadastro = LocalDateTime.now();
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
 
@@ -91,7 +91,7 @@ public class Usuario implements UserDetails {
 		// TODO Auto-generated method stub
 		return this.perfis;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -137,11 +137,9 @@ public class Usuario implements UserDetails {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public String getEmail() {
 		return this.email;
 	}
-	
-	
 
 }
