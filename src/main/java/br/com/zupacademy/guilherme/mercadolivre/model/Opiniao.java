@@ -1,5 +1,7 @@
 package br.com.zupacademy.guilherme.mercadolivre.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,6 +47,10 @@ public class Opiniao {
 		this.produto = produto;
 		this.consumidor = consumidor;
 
+	}
+
+	public Opiniao(Set<Opiniao> opiniao) {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
